@@ -16,15 +16,23 @@ public class MainContainer {
             ContainerController container = runtime.createMainContainer(profile);
 
             // Start agents
-            AgentController wearableDeviceAgent = container.createNewAgent("WearableDeviceAgent", WearableDeviceAgent.class.getName(), null);
+            String patientId = "Patient_001";
+            Object[] agentArgs = new Object[] { patientId };
+            String patientId2 = "Patient_002";
+            Object[] agentArgs2 = new Object[] { patientId2 };
+            AgentController wearableDeviceAgent = container.createNewAgent("WearableDeviceAgent", WearableDeviceAgent.class.getName(), agentArgs);
+            AgentController wearableDeviceAgent2 = container.createNewAgent("WearableDeviceAgent2", WearableDeviceAgent.class.getName(), agentArgs2);
             AgentController doctorAgent = container.createNewAgent("DoctorAgent", DoctorAgent.class.getName(), null);
             AgentController emergencyResponseAgent = container.createNewAgent("EmergencyResponseAgent", EmergencyResponseAgent.class.getName(), null);
             AgentController centralCoordinatorAgent = container.createNewAgent("CentralCoordinatorAgent", CentralCoordinatorAgent.class.getName(), null);
+            AgentController historyAgent = container.createNewAgent("HistoryAgent", HistoryAgent.class.getName(), null);
 
             wearableDeviceAgent.start();
+            wearableDeviceAgent2.start();
             doctorAgent.start();
             emergencyResponseAgent.start();
             centralCoordinatorAgent.start();
+            historyAgent.start();
         } catch (Exception e) {
             e.printStackTrace();
         }
