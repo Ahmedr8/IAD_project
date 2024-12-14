@@ -14,7 +14,7 @@ import com.google.gson.JsonArray;
 
 public class DoctorAgent extends Agent {
     private Gson gson = new Gson();
-    private String apiKey = "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";
+    private String apiKey = "OpenAI key";
     public int i=0;
 
     @Override
