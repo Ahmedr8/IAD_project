@@ -48,12 +48,16 @@ public class HistoryAgent extends Agent {
         });
     }
 
-    private void storePatientData(HealthData data) {
+
+    // Synchronized method to store patient data
+    private synchronized void storePatientData(HealthData data) {
         patientHistory.putIfAbsent(data.getPatientId(), new ArrayList<>());
         patientHistory.get(data.getPatientId()).add(data);
     }
 
-    private List<HealthData> getPatientHistory(String patientId) {
+
+    // Synchronized method to retrieve patient history
+    private synchronized List<HealthData> getPatientHistory(String patientId) {
         return patientHistory.getOrDefault(patientId, new ArrayList<>());
     }
 }

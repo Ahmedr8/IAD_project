@@ -24,14 +24,12 @@ public class MainContainer {
             AgentController wearableDeviceAgent2 = container.createNewAgent("WearableDeviceAgent2", WearableDeviceAgent.class.getName(), agentArgs2);
             AgentController doctorAgent = container.createNewAgent("DoctorAgent", DoctorAgent.class.getName(), null);
             AgentController emergencyResponseAgent = container.createNewAgent("EmergencyResponseAgent", EmergencyResponseAgent.class.getName(), null);
-            AgentController centralCoordinatorAgent = container.createNewAgent("CentralCoordinatorAgent", CentralCoordinatorAgent.class.getName(), null);
             AgentController historyAgent = container.createNewAgent("HistoryAgent", HistoryAgent.class.getName(), null);
 
             wearableDeviceAgent.start();
             wearableDeviceAgent2.start();
             doctorAgent.start();
             emergencyResponseAgent.start();
-            centralCoordinatorAgent.start();
             historyAgent.start();
         } catch (Exception e) {
             e.printStackTrace();
