@@ -1,3 +1,6 @@
+package Agents;
+
+import DataModel.HealthData;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.TickerBehaviour;
@@ -11,7 +14,7 @@ public class WearableDeviceAgent extends Agent {
         Object[] args = getArguments();
         if (args != null && args.length > 0) {
             patientId = (String) args[0];
-            System.out.println("WearableDeviceAgent " + patientId + " is monitoring health data...");
+            System.out.println("Agents.WearableDeviceAgent " + patientId + " is monitoring health data...");
         } else {
             System.out.println("No device ID specified. Terminating.");
             doDelete();
@@ -24,13 +27,13 @@ public class WearableDeviceAgent extends Agent {
                 double heartRate = 60 + Math.random() * 90; // Simulate heart rate
                 double temperature = 36 + Math.random()* 5;  // Simulate temperature
                 ACLMessage hmsg = new ACLMessage(ACLMessage.INFORM);
-                hmsg.addReceiver(new AID("HistoryAgent", AID.ISLOCALNAME));
+                hmsg.addReceiver(new AID("Agents.HistoryAgent", AID.ISLOCALNAME));
                 hmsg.setContent(gson.toJson(new HealthData(patientId, heartRate, temperature)));
                 send(hmsg);
                 System.out.println("wearable device :history Data sent: " + hmsg.getContent());
                 if(heartRate > 120 || temperature > 38) {
                     ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-                    msg.addReceiver(getAID("DoctorAgent"));
+                    msg.addReceiver(getAID("Agents.DoctorAgent"));
                     msg.setContent(gson.toJson(new HealthData(patientId, heartRate, temperature)));                    send(msg);
                     System.out.println("wearable device :emergency Data sent to doctor: " + msg.getContent());
                 }

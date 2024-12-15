@@ -1,3 +1,6 @@
+package Agents;
+
+import DataModel.HealthData;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
@@ -15,7 +18,7 @@ public class HistoryAgent extends Agent {
 
     @Override
     protected void setup() {
-        System.out.println("HistoryAgent " + getLocalName() + " started.");
+        System.out.println("Agents.HistoryAgent " + getLocalName() + " started.");
 
         // Add behavior to handle messages
         addBehaviour(new CyclicBehaviour() {

@@ -1,3 +1,6 @@
+package Agents;
+
+import DataModel.HealthData;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
@@ -33,16 +36,16 @@ public class DoctorAgent extends Agent {
                         double heartRate = data.getHeartRate();
                         double temperature = data.getTemperature();
                         if (heartRate > 120 || temperature > 38) {
-                            // Send a request to the HistoryAgent for patient history
+                            // Send a request to the Agents.HistoryAgent for patient history
                             ACLMessage historyRequest = new ACLMessage(ACLMessage.REQUEST);
-                            historyRequest.addReceiver(new AID("HistoryAgent", AID.ISLOCALNAME));
+                            historyRequest.addReceiver(new AID("Agents.HistoryAgent", AID.ISLOCALNAME));
                             historyRequest.setContent(data.getPatientId()); // Patient ID
                             send(historyRequest);
                             //i want to display the results of the request
 
                             System.out.println("Critical condition detected!");
                             ACLMessage alert = new ACLMessage(ACLMessage.REQUEST);
-                            alert.addReceiver(new AID("EmergencyResponseAgent", AID.ISLOCALNAME));
+                            alert.addReceiver(new AID("Agents.EmergencyResponseAgent", AID.ISLOCALNAME));
                             alert.setContent("Critical Alert for patient: " + msg.getContent());
                             send(alert);
                         }

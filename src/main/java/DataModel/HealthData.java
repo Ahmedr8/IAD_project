@@ -1,4 +1,4 @@
-// Data model
+package DataModel;// Data model
 import java.time.Instant;
 public class HealthData {
     //private Instant timestamp;
